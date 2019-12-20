@@ -35,5 +35,9 @@ int main() {
     }
 
     printf("%d\n", getMax(memory[(size-1)%2], size));
+
+    free(memory[0]);
+    free(memory[1]);
+    free(memory);
     return 0;
 }

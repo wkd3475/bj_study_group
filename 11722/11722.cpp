@@ -1,6 +1,6 @@
 #include <cstdio>
-#include <stdlib.h>
 #include <algorithm>
+#include <stdlib.h>
 
 int getMax(int* array, int size) {
     int max=0;
@@ -14,25 +14,28 @@ int getMax(int* array, int size) {
 
 int main() {
     int size;
-    int *memory, *input;
+    int *inputs;
+    int *memory;
     scanf("%d", &size);
+    inputs = (int*) malloc(sizeof(int)*size);
     memory = (int*) malloc(sizeof(int)*size);
-    input = (int*) malloc(sizeof(int)*size);
+
+    scanf("%d", &inputs[0]);
     for (int i=0; i<size; i++) {
-        scanf("%d", &input[i]);
-        memory[i] = input[i];
+        memory[i] = 1;
     }
 
-    for (int i=0; i<size; i++) {
+    for (int i=1; i<size; i++) {
+        scanf("%d", &inputs[i]);
         for (int j=0; j<i; j++) {
-            if (input[i]>input[j])
-                memory[i]=std::max(memory[i], memory[j]+input[i]);
+            if (inputs[j] > inputs[i]) {
+                memory[i] = std::max(memory[i], memory[j]+1);
+            }
         }
     }
     printf("%d\n", getMax(memory, size));
-
+    free(inputs);
     free(memory);
-    free(input);
 
     return 0;
 }
